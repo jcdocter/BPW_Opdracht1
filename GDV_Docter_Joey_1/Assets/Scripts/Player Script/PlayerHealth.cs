@@ -18,14 +18,17 @@ public class PlayerHealth : MonoBehaviour
         health.SetMaxHealth(maxHealth);
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision other)
     {
         if(other.gameObject.tag == "Enemy")
         {
             currentHealth -= damage;
+            Debug.Log("hit");
         }
 
-        Debug.Log("hit");
+        
+
+
         health.SetHealth(currentHealth);
     }
 }
