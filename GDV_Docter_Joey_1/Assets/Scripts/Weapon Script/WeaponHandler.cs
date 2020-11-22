@@ -5,7 +5,9 @@ public class WeaponHandler : MonoBehaviour
 {
     public float damage = 10f;
     private float range = 100f;
-    private float fireRate = 15f;
+    private float fireRate = 5f;
+
+    private float nextTimeToFire = 0f;
 
     public int maxAmmo = 10;
     private int currentAmmo;
@@ -18,9 +20,14 @@ public class WeaponHandler : MonoBehaviour
 
     public ParticleSystem muzzleFlash;
 
-    private float nextTimeToFire = 0f;
-
     public Animator animator;
+    public GameObject weaponType;
+
+    public enum WeaponType
+    {
+        M1911,
+        AK74
+    }
 
     void Awake()
     {
@@ -33,17 +40,42 @@ public class WeaponHandler : MonoBehaviour
         {
             return;
         }
-
-        if(currentAmmo <= 0)
+        //Pistol weapon
+        if (weaponType.gameObject.name == "M1911")
         {
-            StartCoroutine(Reload());
-            return;
+            if (currentAmmo < 10)
+            {
+                if (currentAmmo <= 0 || Input.GetKeyDown(KeyCode.R))
+                {
+                    StartCoroutine(Reload());
+                    return;
+                }
+            }
+
+            if (Input.GetButtonDown("Fire1"))
+            {
+                nextTimeToFire = Time.time + 1f / fireRate;
+                Shoot();
+            }
         }
 
-        if (Input.GetButtonDown("Fire1"))
+        //AutoWeapon
+        if(weaponType.gameObject.name == "AK74")
         {
-            nextTimeToFire = Time.time + 1f / fireRate;
-            Shoot();
+            if (currentAmmo < 30)
+            {
+                if (currentAmmo <= 0 || Input.GetKeyDown(KeyCode.R))
+                {
+                    StartCoroutine(Reload());
+                    return;
+                }
+            }
+
+            if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire)
+            {
+                nextTimeToFire = Time.time + 1f / fireRate;
+                Shoot();
+            }
         }
 
         Ammo();

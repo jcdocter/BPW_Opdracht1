@@ -9,10 +9,8 @@ public class EnemyController : MonoBehaviour
     public GameObject player;
 
 
-
     void Awake()
     {
-       
         enemy = GetComponent<NavMeshAgent>();    
     }
 
@@ -25,12 +23,10 @@ public class EnemyController : MonoBehaviour
 
             enemy.SetDestination(newPos);
 
-        if(distance <= enemy.stoppingDistance)
+      if(distance <= enemy.stoppingDistance)
         {
             FaceTarget();
         }
-
-
     }
 
     void FaceTarget()

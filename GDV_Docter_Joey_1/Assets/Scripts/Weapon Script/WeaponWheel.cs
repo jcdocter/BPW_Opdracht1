@@ -152,10 +152,12 @@ public class WeaponWheel : MonoBehaviour
         else if (isInside(pos[0], pos[4], pos[5], mousePos))
         {
             EnableHighlight(3);
+            SwitchWeapon.instance.SelectWeapon(3);
         }
         else if (isInside(pos[0], pos[5], pos[1], mousePos))
         {
             EnableHighlight(4);
+            SwitchWeapon.instance.SelectWeapon(4);
         }
     }
 }
