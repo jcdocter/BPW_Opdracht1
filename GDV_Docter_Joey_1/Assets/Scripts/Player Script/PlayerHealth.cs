@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class PlayerHealth : MonoBehaviour
@@ -27,5 +28,15 @@ public class PlayerHealth : MonoBehaviour
         }
 
         health.SetHealth(currentHealth);
+
+        if(currentHealth <= 0)
+        {
+            Death();
+        }
+    }
+
+    void Death()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
