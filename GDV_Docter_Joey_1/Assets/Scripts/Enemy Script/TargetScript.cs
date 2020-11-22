@@ -3,6 +3,7 @@
 public class TargetScript : MonoBehaviour
 {
     private float health = 50f;
+    public static int AliveEnemy = 5;
 
     public void TakeDamage(float amount)
     {
@@ -16,5 +17,6 @@ public class TargetScript : MonoBehaviour
     void Death()
     {
         Destroy(gameObject);
+        AliveEnemy--;
     }
 }

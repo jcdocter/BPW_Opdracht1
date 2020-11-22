@@ -6,19 +6,20 @@ using UnityEngine.AI;
 public class EnemyController : MonoBehaviour
 {
     private NavMeshAgent enemy;
-    public GameObject player;
+    private Transform target;
 
 
     void Awake()
     {
-        enemy = GetComponent<NavMeshAgent>();    
+        enemy = GetComponent<NavMeshAgent>();
+        target = GameObject.FindWithTag(Tags.PLAYER_TAG).transform;
     }
 
     void Update()
     {
-     float distance = Vector3.Distance(transform.position, player.transform.position);
+     float distance = Vector3.Distance(transform.position, target.transform.position);
 
-            Vector3 moveToPlayer = transform.position - player.transform.position;
+            Vector3 moveToPlayer = transform.position - target.transform.position;
             Vector3 newPos = transform.position - moveToPlayer;
 
             enemy.SetDestination(newPos);
@@ -31,7 +32,7 @@ public class EnemyController : MonoBehaviour
 
     void FaceTarget()
     {
-        Vector3 direction = (player.transform.position - transform.position).normalized;
+        Vector3 direction = (target.transform.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
