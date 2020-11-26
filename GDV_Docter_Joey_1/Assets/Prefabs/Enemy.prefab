@@ -84,7 +84,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7123e8173ffd00a4ab49d51b3aede097, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2337910319774688688, guid: 3dbcaa4835d5c8a4b927a3a27ed369d7, type: 3}
+  attackDistance: 1.8
+  chaseAfterAttackDistance: 2
+  WaitBeforeAttack: 0.5
 --- !u!114 &2516966041733428367
 MonoBehaviour:
   m_ObjectHideFlags: 0

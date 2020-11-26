@@ -3,7 +3,7 @@
 public class TargetScript : MonoBehaviour
 {
     private float health = 50f;
-    public static int AliveEnemy = 5;
+    public static int AliveEnemy = 3;
 
     public void TakeDamage(float amount)
     {
