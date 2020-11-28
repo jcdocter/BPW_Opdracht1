@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 public class SwitchScene : MonoBehaviour
 {
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
-        if (TargetScript.AliveEnemy == 0)
+        if (TargetScript.AliveEnemy == 0 && Input.GetKey("space") && other.tag == Tags.PLAYER_TAG)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }

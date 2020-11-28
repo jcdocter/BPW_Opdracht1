@@ -13,7 +13,7 @@ public class TimeController : MonoBehaviour
     private TimeSpan timePlaying;
     private bool timerOnGoing;
 
-    private float elapsedTime = 3f;
+    private float elapsedTime = 300f;
 
     void Awake()
     {
