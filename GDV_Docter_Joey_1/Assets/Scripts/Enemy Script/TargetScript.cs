@@ -18,5 +18,6 @@ public class TargetScript : MonoBehaviour
     {
         Destroy(gameObject);
         AliveEnemy--;
+        TimeController.instance.AddTime(5f);
     }
 }

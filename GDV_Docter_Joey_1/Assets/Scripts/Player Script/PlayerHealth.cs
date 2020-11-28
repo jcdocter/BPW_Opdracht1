@@ -60,6 +60,6 @@ public class PlayerHealth : MonoBehaviour
 
     void Death()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(0);
     }
 }
