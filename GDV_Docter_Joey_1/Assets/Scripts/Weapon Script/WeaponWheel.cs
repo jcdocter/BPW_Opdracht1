@@ -54,6 +54,14 @@ public class WeaponWheel : MonoBehaviour
 
     [SerializeField] private Camera playerCamera;
 
+    public Image timerBar;
+    public static float powerUpTimer;
+    public static bool stopCounting = false;
+
+    private void Awake()
+    {
+        powerUpTimer = 0f;
+    }
 
     void Start()
     {
@@ -70,6 +78,20 @@ public class WeaponWheel : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(powerUpTimer);
+        if (stopCounting == false)
+        {
+            if (powerUpTimer <= 60f)
+            {
+                powerUpTimer += Time.deltaTime;
+                timerBar.fillAmount = powerUpTimer / 60f;
+            }
+            else
+            {
+                stopCounting = true;
+            }
+        }
+
         if (Input.GetKey(wheelKey))
         {
             EnableWheel();
@@ -154,7 +176,7 @@ public class WeaponWheel : MonoBehaviour
             EnableHighlight(3);
             SwitchWeapon.instance.SelectWeapon(3);
         }
-        else if (isInside(pos[0], pos[5], pos[1], mousePos))
+        else if (isInside(pos[0], pos[5], pos[1], mousePos) && stopCounting == true)
         {
             EnableHighlight(4);
             SwitchWeapon.instance.SelectWeapon(4);
