@@ -78,7 +78,6 @@ public class WeaponWheel : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(powerUpTimer);
         if (stopCounting == false)
         {
             if (powerUpTimer <= 60f)

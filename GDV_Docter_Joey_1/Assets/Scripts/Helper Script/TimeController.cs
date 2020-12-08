@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
@@ -39,17 +37,12 @@ public class TimeController : MonoBehaviour
 
         if (elapsedTime <= 0f)
         {
-            GameOver();
+            FindObjectOfType<GameManager>().EndGame();
         }
     }
 
     public void AddTime(float addTime)
     {
         elapsedTime += addTime;
-    }
-
-    void GameOver()
-    {
-        SceneManager.LoadScene(0);
     }
 }

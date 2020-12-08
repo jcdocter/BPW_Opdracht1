@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
@@ -33,7 +31,7 @@ public class PlayerHealth : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            Death();
+            FindObjectOfType<GameManager>().EndGame();
         }
     }
 
@@ -42,7 +40,6 @@ public class PlayerHealth : MonoBehaviour
         if (currentHealth != maxHealth)
         {
             refillTimer += Time.deltaTime;
-            Debug.Log(refillTimer + " " + currentHealth);
 
             if (refillTimer > 3f)
             {
@@ -56,10 +53,5 @@ public class PlayerHealth : MonoBehaviour
             currentHealth = maxHealth;
             refillTimer = 0f;
         }
-    }
-
-    void Death()
-    {
-        SceneManager.LoadScene(0);
     }
 }
