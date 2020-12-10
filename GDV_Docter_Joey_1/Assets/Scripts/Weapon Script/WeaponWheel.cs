@@ -142,6 +142,7 @@ public class WeaponWheel : MonoBehaviour
             }
         }
     }
+
     void CheckForCurrentWeapon()
     {
         if(playerCamera == null)
