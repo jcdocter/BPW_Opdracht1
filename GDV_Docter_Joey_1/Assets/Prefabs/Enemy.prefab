@@ -86,7 +86,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDistance: 1.8
   chaseAfterAttackDistance: 2
-  WaitBeforeAttack: 0.5
 --- !u!114 &2516966041733428367
 MonoBehaviour:
   m_ObjectHideFlags: 0

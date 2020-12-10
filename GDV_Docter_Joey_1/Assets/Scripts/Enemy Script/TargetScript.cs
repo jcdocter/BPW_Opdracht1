@@ -2,8 +2,10 @@
 
 public class TargetScript : MonoBehaviour
 {
-    private float health = 50f;
-    public static int AliveEnemy = 3;
+    public float health = 50f;
+
+    public static int AliveEnemy = 50;
+
     public void TakeDamage(float amount)
     {
         health -= amount;

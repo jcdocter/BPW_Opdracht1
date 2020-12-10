@@ -9,9 +9,12 @@ public class EnemyController : MonoBehaviour
     private Transform target;
 
     public float attackDistance = 1.8f;
-    public float chaseAfterAttackDistance = 2f;
-
     private float WaitBeforeAttack = 0.5f;
+
+    public float chaseSpeed = 5f;
+    private float movementSpeed = 4f;
+    private float timeToMove = 0f;
+
     private float attackTimer;
     private int playerDamage = 10;
 
@@ -34,15 +37,30 @@ public class EnemyController : MonoBehaviour
     {
         switch (enemyState)
         {
-            case EnemyState.CHASE: Chase();
+            case EnemyState.CHASE: Chase(movementSpeed);
                 break;
             case EnemyState.ATTACK: Attack();
                 break;
         }
     }
 
-    void Chase()
+    public void Chase(float speed)
     {
+        movementSpeed = speed;
+        enemy.speed = movementSpeed;
+
+
+        if (movementSpeed <= 0f)
+        {
+            timeToMove += Time.deltaTime;
+            Debug.Log(timeToMove);
+            if (timeToMove >= 5f)
+            {
+                movementSpeed = 4f;
+                timeToMove = 0f;
+            }
+        }
+
         float distance = Vector3.Distance(transform.position, target.transform.position);
 
         Vector3 moveToPlayer = transform.position - target.transform.position;

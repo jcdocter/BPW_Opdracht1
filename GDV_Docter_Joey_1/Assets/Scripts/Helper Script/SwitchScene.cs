@@ -30,7 +30,7 @@ public class SwitchScene : MonoBehaviour
                    PlayerPrefs.SetInt("LastLevel", levelIndex);
                    PlayerPrefs.Save();
             */
-            TargetScript.AliveEnemy = 3;
+            TargetScript.AliveEnemy = 50;
         }
     }
 }

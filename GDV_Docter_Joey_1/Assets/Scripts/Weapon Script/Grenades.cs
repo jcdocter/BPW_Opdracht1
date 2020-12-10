@@ -7,8 +7,10 @@ public class Grenades : MonoBehaviour
     private float delay = 3f;
     private float radius = 5f;
     private float force = 700f;
+    private float damage = 40f;
 
     public GameObject explosionEffect;
+    public GameObject grenadeType;
 
     private float countdown;
 
@@ -40,12 +42,17 @@ public class Grenades : MonoBehaviour
               foreach(Collider nearbyObject in collidersToHit)
               {
                   TargetScript target = nearbyObject.GetComponent<TargetScript>();
+                  EnemyController targetMovement = nearbyObject.GetComponent<EnemyController>();
 
-                  if(target != null)
+                  if(target != null && grenadeType.gameObject.tag == Tags.RGD5_TAG)
                   {
-                      target.TakeDamage(40);
+                      target.TakeDamage(damage);
                   }
-              }
+                  if (target != null && grenadeType.gameObject.tag == Tags.FLASH_TAG)
+                  {
+                    targetMovement.Chase(0f);
+                  }
+        }
 
               Collider[] collidersToMove = Physics.OverlapSphere(transform.position, radius);
 
