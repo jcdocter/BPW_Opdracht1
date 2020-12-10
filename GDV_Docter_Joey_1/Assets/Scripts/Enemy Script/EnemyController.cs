@@ -53,7 +53,6 @@ public class EnemyController : MonoBehaviour
         if (movementSpeed <= 0f)
         {
             timeToMove += Time.deltaTime;
-            Debug.Log(timeToMove);
             if (timeToMove >= 5f)
             {
                 movementSpeed = 4f;

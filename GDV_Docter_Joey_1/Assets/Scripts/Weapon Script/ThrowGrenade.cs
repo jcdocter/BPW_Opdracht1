@@ -6,13 +6,23 @@ public class ThrowGrenade : MonoBehaviour
 {
     private float throwForce = 20f;
     public GameObject grenadePrefab;
+    private float throwTimer = 3f;
 
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (throwTimer >= 3f)
         {
-            Throw();
+            this.transform.localScale = new Vector3(1, 1, 1);
+            if (Input.GetMouseButtonDown(0))
+            {
+                Throw();
+                throwTimer = 0f;
+                this.transform.localScale = new Vector3(0, 0, 0);
+            }
+        } else
+        {
+            throwTimer += Time.deltaTime;
         }
     }
 

@@ -8,7 +8,7 @@ public class GenerateEnemies : MonoBehaviour
     private int xPos;
     private int zPos;
     public int enemyCount;
-    public int SpawnTotal = 5;
+    public int SpawnTotal = 50;
 
     void Start()
     {
