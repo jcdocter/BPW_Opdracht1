@@ -1,7 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+//made by Joey Docter
+//minimap
 public class MinimapScript : MonoBehaviour
 {
     public Transform Player;

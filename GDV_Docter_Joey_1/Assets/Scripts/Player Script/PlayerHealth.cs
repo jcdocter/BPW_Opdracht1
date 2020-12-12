@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
-
+//made by Joey Docter
+//player health
 public class PlayerHealth : MonoBehaviour
 {
     public int maxHealth = 100;
@@ -13,6 +13,7 @@ public class PlayerHealth : MonoBehaviour
 
     void Awake()
     {
+        //start max health
         currentHealth = maxHealth;
         health.SetMaxHealth(maxHealth);
     }
@@ -23,12 +24,13 @@ public class PlayerHealth : MonoBehaviour
     }
     public void HitPlayer(int damage)
     {
-
+        //take damage
         currentHealth -= damage;
         refillTimer = 0f;
 
         health.SetHealth(currentHealth);
 
+        //death
         if (currentHealth <= 0)
         {
             FindObjectOfType<GameManager>().EndGame();
@@ -41,13 +43,14 @@ public class PlayerHealth : MonoBehaviour
         {
             refillTimer += Time.deltaTime;
 
+            // gain health back
             if (refillTimer > 3f)
             {
                 currentHealth += 1;
                 health.SetHealth(currentHealth);
             }
         }
-
+        // cant go further than max health
         if(currentHealth >= maxHealth)
         {
             currentHealth = maxHealth;

@@ -1,14 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 
+//made by Joey Docter
+//movement player
 public class PlayerMovement : MonoBehaviour
 {
     public CharacterController playerController;
 
     private float movementSpeed = 5f;
-    private float sprint = 12f;
+    private float sprint = 10f;
     private float gravity = -19.62f;
 
     Vector3 verticalVelocity;

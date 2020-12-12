@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//Made by Joey Docter
+//weapon wheel
 public class WeaponWheel : MonoBehaviour
 {
     public static WeaponWheel instance;
@@ -65,8 +65,10 @@ public class WeaponWheel : MonoBehaviour
 
     void Start()
     {
+        //wheel is not active on the start
         DisableWheel();
 
+        //get all options
         for(int i = 0; i < wheels.Length; i++)
         {
             if(wheels[i].wheel != null)
@@ -78,6 +80,7 @@ public class WeaponWheel : MonoBehaviour
 
     void Update()
     {
+        //counter for power up
         if (stopCounting == false)
         {
             if (powerUpTimer <= 60f)
@@ -102,29 +105,35 @@ public class WeaponWheel : MonoBehaviour
         }
     }
 
+    //activate wheel
     void EnableWheel()
     {
         if(wheelParent != null)
         {
             wheelParent.SetActive(true);
             wheelEnabled = true;
+
+            //mouse can be used
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
     }
 
+    //deactivate wheel
     void DisableWheel()
     {
         if (wheelParent != null)
         {
             wheelParent.SetActive(false);
             wheelEnabled = false;
+            
+            //mouse is disabeld
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
     }
 
-    //is the wheel selected
+    //is the option selected
     void EnableHighlight(int index)
     {
         for(int i = 0; i < wheels.Length; i++)
@@ -143,6 +152,7 @@ public class WeaponWheel : MonoBehaviour
         }
     }
 
+    //change weapon
     void CheckForCurrentWeapon()
     {
         if(playerCamera == null)
@@ -176,6 +186,8 @@ public class WeaponWheel : MonoBehaviour
             EnableHighlight(3);
             SwitchWeapon.instance.SelectWeapon(3);
         }
+
+        //enable super weapon if counting is true
         else if (isInside(pos[0], pos[5], pos[1], mousePos) && stopCounting == true)
         {
             EnableHighlight(4);

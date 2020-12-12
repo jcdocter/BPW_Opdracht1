@@ -1,14 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+//made by Joey Docter
+//move with mouse
 public class MouseLook : MonoBehaviour
 {
     private float mouseSensitivity = 200f;
     public Transform playerBody;
     private float xRotation = 0f;
 
-    //disapear mousr cursor
+    //disapear mouse cursor
     void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -16,6 +16,7 @@ public class MouseLook : MonoBehaviour
 
     void Update()
     {
+        // if weapon wheel is active dont move 
         if (Cursor.lockState == CursorLockMode.Locked)
         {
             //rotate players vision

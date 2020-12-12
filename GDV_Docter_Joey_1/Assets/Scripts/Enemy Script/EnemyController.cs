@@ -1,10 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
+//made by Joey Docter
+//movement enemy
 public class EnemyController : MonoBehaviour
 {
+    private EnemyAnimator enemyAnim;
     private NavMeshAgent enemy;
     private Transform target;
 
@@ -12,11 +13,11 @@ public class EnemyController : MonoBehaviour
     private float WaitBeforeAttack = 0.5f;
 
     public float chaseSpeed = 5f;
-    private float movementSpeed = 4f;
+    private float movementSpeed;
     private float timeToMove = 0f;
 
     private float attackTimer;
-    private int playerDamage = 10;
+    private int playerDamage;
 
 
     public enum EnemyState
@@ -30,7 +31,12 @@ public class EnemyController : MonoBehaviour
     void Awake()
     {
         enemy = GetComponent<NavMeshAgent>();
+        enemyAnim = GetComponent<EnemyAnimator>();
         target = GameObject.FindWithTag(Tags.PLAYER_TAG).transform;
+
+        //random value for movement and attack damage
+        movementSpeed = Random.Range(4f, 10f);
+        playerDamage = Random.Range(10, 30);
     }
 
     void Update()
@@ -46,12 +52,15 @@ public class EnemyController : MonoBehaviour
 
     public void Chase(float speed)
     {
+        enemyAnim.RunAnimation(true);
+        //movement speed
         movementSpeed = speed;
         enemy.speed = movementSpeed;
 
-
+        // timer to stop moving if movement is 0
         if (movementSpeed <= 0f)
         {
+            enemyAnim.RunAnimation(false);
             timeToMove += Time.deltaTime;
             if (timeToMove >= 5f)
             {
@@ -60,6 +69,7 @@ public class EnemyController : MonoBehaviour
             }
         }
 
+        //move to player
         float distance = Vector3.Distance(transform.position, target.transform.position);
 
         Vector3 moveToPlayer = transform.position - target.transform.position;
@@ -67,13 +77,16 @@ public class EnemyController : MonoBehaviour
 
         enemy.SetDestination(newPos);
 
+        //face direction to player
         if (distance <= enemy.stoppingDistance)
         {
             FaceTarget();
         }
 
+        //change to attack state
         if(Vector3.Distance(transform.position, target.position) <= attackDistance)
         {
+            enemyAnim.RunAnimation(false);
             enemyState = EnemyState.ATTACK;
         }
     }
@@ -87,14 +100,17 @@ public class EnemyController : MonoBehaviour
 
     void Attack()
     {
+        //wait to attack
         attackTimer += Time.deltaTime;
         if (attackTimer > WaitBeforeAttack)
         {
+            enemyAnim.AttackAnimation();
             PlayerHealth playerTarget = target.transform.GetComponent<PlayerHealth>();
             playerTarget.HitPlayer(playerDamage);
             attackTimer = 0f;
         };
 
+        // stop attacking and chase player
         if (Vector3.Distance(transform.position, target.position) > attackDistance)
         {
             enemyState = EnemyState.CHASE;

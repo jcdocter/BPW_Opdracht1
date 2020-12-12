@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+//made by Joey Docter
+//switch weapon
 public class SwitchWeapon : MonoBehaviour
 {
     [SerializeField]
@@ -9,10 +11,11 @@ public class SwitchWeapon : MonoBehaviour
 
     public static SwitchWeapon instance;
 
-    // Start is called before the first frame update
     void Awake()
     {
         instance = this;
+
+        //weapon on index 0 is active
         weapons[currentWeapon].gameObject.SetActive(true);
     }
 
@@ -25,6 +28,8 @@ public class SwitchWeapon : MonoBehaviour
         }
 
         currentWeapon = weaponIndex;
+        
+        //get all weapons in the array
         for(int i = 0; i < weapons.Length; i++)
         {
             if(weapons[i] == null)
@@ -33,10 +38,12 @@ public class SwitchWeapon : MonoBehaviour
             }
             if(i != currentWeapon)
             {
+                //disable current weapon
                 weapons[i].gameObject.SetActive(false);
             }
             else
             {
+                //get weaponIndex
                 weapons[i].gameObject.SetActive(true);
                 currentWeapon = weaponIndex;
             }

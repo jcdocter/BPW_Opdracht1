@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using TMPro;
+
+//made by Joey Docter
+// change weapon functions
 public class WeaponHandler : MonoBehaviour
 {
     public float damage = 10f;
@@ -54,6 +57,7 @@ public class WeaponHandler : MonoBehaviour
                 break;
         }
 
+        //update ammo text
         Ammo();
     }
 
@@ -81,7 +85,7 @@ public class WeaponHandler : MonoBehaviour
             weaponTypes = WeaponType.AK74;
         }
 
-        else if (weaponType.gameObject.name == "Uzi")
+        else if (weaponType.gameObject.name == "Super weapon")
         {
             weaponTypes = WeaponType.SUPERWEAPON;
         }
@@ -111,7 +115,7 @@ public class WeaponHandler : MonoBehaviour
             weaponTypes = WeaponType.M1911;
         }
 
-        else if (weaponType.gameObject.name == "Uzi")
+        else if (weaponType.gameObject.name == "Super weapon")
         {
             weaponTypes = WeaponType.SUPERWEAPON;
         }
@@ -119,9 +123,10 @@ public class WeaponHandler : MonoBehaviour
 
     void PowerUp()
     {
+        //Power up weapon
+        // ammo is equal to 60 from the timer
         currentAmmo = Mathf.RoundToInt(WeaponWheel.powerUpTimer);
 
-        //Power up weapon
         if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire)
         {
             nextTimeToFire = Time.time + 1f / fireRate;
@@ -135,6 +140,7 @@ public class WeaponHandler : MonoBehaviour
             weaponTypes = WeaponType.M1911;
         }
 
+        //force cahnge weapon
         else if (currentAmmo <= 0f)
         {
             SwitchWeapon.instance.SelectWeapon(0);
@@ -152,10 +158,13 @@ public class WeaponHandler : MonoBehaviour
 
     void Shoot()
     {
+        //activate shoot animation
         muzzleFlash.Play();
 
+        //decrease ammo
         currentAmmo--;
 
+        //hit enemy
         RaycastHit hit;
         if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
         {
@@ -164,6 +173,7 @@ public class WeaponHandler : MonoBehaviour
         }
     }
 
+    //reload weapon
     IEnumerator Reload()
     {
         isReloading = true;
@@ -184,6 +194,7 @@ public class WeaponHandler : MonoBehaviour
         animator.SetBool("Reloading", false);
     }
 
+    //display ammo
     void Ammo()
     {
         ammoText.text = currentAmmo.ToString() + " / " + maxAmmo.ToString();
