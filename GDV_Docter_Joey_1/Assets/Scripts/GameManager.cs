@@ -9,6 +9,14 @@ public class GameManager : MonoBehaviour
 {
     bool gameHasEnded = false;
 
+    void Update()
+    {
+        if (Input.GetKey("escape"))
+        {
+            Application.Quit();
+        }
+    }
+
     //end game
     public void EndGame()
     {
@@ -29,5 +37,6 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.Save();
 
         TargetScript.AliveEnemy = 50;
+        GenerateEnemies.enemyLeft = 50;
     }
 }
