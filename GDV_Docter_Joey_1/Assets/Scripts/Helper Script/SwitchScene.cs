@@ -19,15 +19,10 @@ public class SwitchScene : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        Debug.Log(levelIndex);  
-    }
-
     void OnTriggerStay(Collider other)
     {
         //move to next level
-        if (Input.GetKey("space") && other.tag == Tags.PLAYER_TAG)
+        if (Input.GetKey("space") && other.tag == Tags.PLAYER_TAG && TargetScript.AliveEnemy == 0)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
@@ -41,14 +36,12 @@ public class SwitchScene : MonoBehaviour
         }
 
         // end game
-        if(Input.GetKey("space") && other.tag == Tags.PLAYER_TAG && levelIndex == 3)
+        if(levelIndex == 3)
         {
-            levelIndex = 0;
+            FindObjectOfType<GameManager>().EndGame();
             Application.Quit();
 
-            // reset value
-            TargetScript.AliveEnemy = 50;
-            GenerateEnemies.enemyLeft = 50;
+            
         }
     }
 }
